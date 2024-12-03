@@ -1,9 +1,8 @@
 import pygame
 import os
 
-
+# Load images
 board = pygame.transform.scale2x(pygame.image.load(os.path.join("image", "board_alt.png")))
-
 
 b_bishop = pygame.image.load(os.path.join("image", "black_bishop.png"))
 b_king = pygame.image.load(os.path.join("image", "black_king.png"))
@@ -12,8 +11,6 @@ b_pawn = pygame.image.load(os.path.join("image", "black_pawn.png"))
 b_queen = pygame.image.load(os.path.join("image", "black_queen.png"))
 b_rook = pygame.image.load(os.path.join("image", "black_rook.png"))
 
-
-
 w_bishop = pygame.image.load(os.path.join("image", "white_bishop.png"))
 w_king = pygame.image.load(os.path.join("image", "white_king.png"))
 w_knight = pygame.image.load(os.path.join("image", "white_knight.png"))
@@ -21,24 +18,9 @@ w_pawn = pygame.image.load(os.path.join("image", "white_pawn.png"))
 w_queen = pygame.image.load(os.path.join("image", "white_queen.png"))
 w_rook = pygame.image.load(os.path.join("image", "white_rook.png"))
 
-
-b = [b_bishop, b_king, b_knight, b_pawn, b_queen, b_rook]
-w = [w_bishop, w_king, w_knight, w_pawn, w_queen, w_rook]
-
-B = []
-W = []
-
-
-for img in b:
-    B.append(pygame.transform.scale(img, (65, 65)))
-
-
-for img in w:
-    W.append(pygame.transform.scale(img, (65, 65)))
-
-
-
-
+# Scale images
+B = [pygame.transform.scale(img, (65, 65)) for img in [b_bishop, b_king, b_knight, b_pawn, b_queen, b_rook]]
+W = [pygame.transform.scale(img, (65, 65)) for img in [w_bishop, w_king, w_knight, w_pawn, w_queen, w_rook]]
 
 class Piece:
     img = -1
@@ -55,50 +37,36 @@ class Piece:
         self.king = False
         self.pawn = False
 
-
-
     def isSelected(self):
         return self.selected
-    
 
-    def update_valid_moves(self):
-        self.move_list = self.valid_moves(board)
-    
+    def update_valid_moves(self, board):
+        self.move_list = self.valid_moves(board)  # Ensure valid_moves is defined
 
+    def valid_moves(self, board):
+        # Placeholder for move validation logic
+        return []
 
     def draw(self, win):
-                
-        if self.color == "w":
-            drawThis = W[self.img]
-        
-        else:
-            drawThis = B[self.img]
-
+        drawThis = W[self.img] if self.color == "w" else B[self.img]
 
         if self.selected:
-            moves = self.move_list
+            for move in self.move_list:
+                x = 5 + round(self.startX + (move[1] * self.rect[2] / 8))
+                y = 5 + round(self.startY + (move[0] * self.rect[3] / 8))
+                pygame.draw.circle(win, (255, 0, 0), (x, y), 10)
 
-            for move in moves:
-                x = 5 + round(self.startX + (move[0] * self.rect[2]/8))
-                y = 5 + round(self.startY + (move[1] * self.rect[3]/8))
-                pygame.draw.circle(win, (255, 0, 0), 10)
-
-
-        x = 5 + round(self.startX + (self.col * self.rect[2]/8))
-        y = 5 + round(self.startY + (self.row * self.rect[3]/8))
-
+        x = 5 + round(self.startX + (self.col * self.rect[2] / 8))
+        y = 5 + round(self.startY + (self.row * self.rect[3] / 8))
 
         if self.selected:
             pygame.draw.rect(win, (255, 0, 0), (x, y, 55, 55), 2)
-            
 
         win.blit(drawThis, (x, y))
 
-
-
     def change_pos(self, pos):
-        self.row = pos[0]
-        self.col = pos[1]
+        self.row, self.col = pos
+
 
 
 
