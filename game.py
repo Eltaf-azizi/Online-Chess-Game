@@ -81,28 +81,27 @@ def click(pos):
 
 
 def main():
-
-    p1Time = 900
-    p2Time = 900
-    turn = "w"
-    bo = Board(8, 8)
-    bo.update_moves()
-    clock = pygame.time.Clock()
+    p1Time = 900  # Set initial time for Player 1 (15 minutes)
+    p2Time = 900  # Set initial time for Player 2 (15 minutes)
+    turn = "w"  # White starts
+    bo = Board()  # Create a new Board object (no arguments needed)
+    bo.update_moves()  # Update all the moves of the pieces
+    clock = pygame.time.Clock()  # Create a clock object to manage the frame rate
     run = True
-    startTime = time.time()
+    startTime = time.time()  # Start the timer
 
     while run:
+        clock.tick(10)  # Run at 10 frames per second
 
-        clock.tick(10)
-
+        # Update player time based on turn
         if turn == "w":
-            p1Time -= p1Time - (time.time() - startTime)
-
+            p1Time -= time.time() - startTime  # Decrease time for Player 1
         else:
-            p2Time -= p2Time - (time.time() - startTime)
+            p2Time -= time.time() - startTime  # Decrease time for Player 2
 
-        startTime = time.time()
+        startTime = time.time()  # Reset start time for the next frame
 
+        # Redraw the game window with the updated board and times
         redraw_gameWindow(win, bo, int(p1Time), int(p2Time))
 
         for event in pygame.event.get():
@@ -111,30 +110,29 @@ def main():
                 quit()
                 pygame.quit()
 
-
+            # Handle mouse click events to select and move pieces
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pos = pygame.mouse.get_pos()
-                bo.update_moves()
-                i, j = click(pos)
-                change = bo.select(i, j, turn)
-                bo.update_moves()
-
+                bo.update_moves()  # Update valid moves for each piece
+                i, j = click(pos)  # Get the clicked square's coordinates
+                change = bo.select(i, j, turn)  # Try to select and move the piece
+                bo.update_moves()  # Update valid moves again after the move
 
                 if change:
-                    startTime = time.time()
+                    startTime = time.time()  # Reset the timer if a move occurred
+                    # Change turn to the other player
                     if turn == "w":
                         turn = "b"
-
                     else:
                         turn = "w"
-                
 
-        # check for checkmate
+        # Check if either player has won (checkmate)
         if bo.checkMate("w"):
-            end_screen(win, "Black Wins!")
+            end_screen(win, "Black Wins!")  # White is checkmated, black wins
 
         elif bo.checkMate("b"):
-            end_screen(win, "White Wins!")
+            end_screen(win, "White Wins!")  # Black is checkmated, white wins
+
 
 width = 750
 height = 750
