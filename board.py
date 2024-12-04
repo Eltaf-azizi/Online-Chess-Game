@@ -11,7 +11,7 @@ class Board:
         self.rows = 8
         self.cols = 8
         self.board = [[None for _ in range(self.cols)] for _ in range(self.rows)]
-        self.initialize_board()
+       
 
         self.board[0][0] = Rook(0, 0, "b")
         self.board[0][1] = Knight(0, 1, "b")
@@ -49,9 +49,6 @@ class Board:
         self.board[6][6] = Pawn(6, 6, "w")
         self.board[6][7] = Pawn(6, 7, "w")
 
-    def initialize_board(self):
-        # Initialize pieces on the board (if required, but this is redundant since pieces are initialized in __init__)
-        pass
 
     def update_moves(self):
         for row in self.board:
@@ -78,18 +75,28 @@ class Board:
     def checkMate(self, color):
         danger_moves = self.get_danger_moves(color)
         king_moves = []
+        block_moves = []
         for i in range(self.rows):
             for j in range(self.cols):
                 if self.board[i][j] is not None:
-                    if self.board[i][j].king and self.board[i][j].color == color:
-                        for move in self.board[i][j].move_list:
-                            king_moves.append(move)
+                    if self.board[i][j].color == color:
+                        if self.board[i][j].king :
+                            for move in self.board[i][j].move_list:
+                                king_moves.append(move)
+                        else:
+                            for move in self.board[i][j].move_list:
+                                block_moves.append(move)
+
         if len(king_moves) == 0:
             return False
 
-        for move in king_moves:
-            if move not in danger_moves:
-                return False
+        for block in block_moves:
+            dMoves = danger_moves[:]
+            if block in danger_moves:
+                dMoves.remove(block)
+            for move in king_moves:
+                if move not in dMoves:
+                    return False
         return True
 
     def is_checked(self, color):
@@ -157,6 +164,7 @@ class Board:
         self.board = nBoard
 
         self.update_moves()
+        print("check before")
 
         if self.is_checked(color) or (checkedBefore and self.is_checked(color)):
             changed = False
