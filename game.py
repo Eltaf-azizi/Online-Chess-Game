@@ -77,13 +77,14 @@ def click(pos):
             j = int(divY / (rect[3]/8))
             return i, j
 
-
+    return -1, -1
 
 
 def main():
     p1Time = 900  
     p2Time = 900  
     turn = "w"  
+    count = 0
     bo = Board()  
     bo.update_moves()  
     clock = pygame.time.Clock()  
@@ -91,13 +92,17 @@ def main():
     startTime = time.time()  
 
     while run:
-        clock.tick(10) 
+        clock.tick(15) 
 
         
         if turn == "w":
-            p1Time -= time.time() - startTime  
+            p1Time -= time.time() - startTime 
+            if p1Time <= 0:
+                end_screen(win, "Black Wins") 
         else:
             p2Time -= time.time() - startTime 
+            if p2Time <= 0:
+                end_screen(win, "White Wins")
 
         startTime = time.time()  
 
@@ -111,15 +116,16 @@ def main():
                 pygame.quit()
 
             
-            if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.type == pygame.MOUSEBUTTONUP:
                 pos = pygame.mouse.get_pos()
                 bo.update_moves() 
                 i, j = click(pos)  
-                change = bo.select(i, j, turn) 
-                bo.update_moves()  
+                change = bo.select(i, j, turn)
 
-                if change:
+                if change == True:
                     startTime = time.time()  
+                    count += 1
+                    print(count)
                    
                     if turn == "w":
                         turn = "b"
