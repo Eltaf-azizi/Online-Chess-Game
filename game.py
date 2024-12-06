@@ -138,10 +138,12 @@ def main():
 
             
             if event.type == pygame.MOUSEBUTTONUP:
+                import numpy
                 pos = pygame.mouse.get_pos()
                 bo.update_moves() 
                 i, j = click(pos)  
                 change = bo.select(i, j, turn)
+                print(numpy.array(bo.board))
 
                 if change == True:
                     startTime = time.time()  
