@@ -10,6 +10,27 @@ board = pygame.transform.scale(pygame.image.load(os.path.join("image", "board_al
 rect = (113, 113, 525, 525)
 
 
+def menu_screen(win):
+    run = True
+
+    while run: 
+        win.fill((128, 128, 128))
+        font = pygame.font.SysFont("comicsans", 80)
+        title = font.render("Online Chess!", 1, (0, 128, 0))
+        win.blit(title, (width/2 - title.get_width()/2, 200))
+        pygame.display.update()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                run = False
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                run = False
+
+
+    main()
+
 
 def redraw_gameWindow(win, bo, p1, p2):
 
@@ -72,7 +93,7 @@ def click(pos):
         if rect[1] < y < rect[1] + rect[3]:
             
             divX = x - rect[0]
-            divY = y - rect[0]
+            divY = y - rect[1]
             i = int(divX / (rect[2]/8))
             j = int(divY / (rect[3]/8))
             return i, j
@@ -125,17 +146,16 @@ def main():
                 if change == True:
                     startTime = time.time()  
                     count += 1
-                    print(count)
                    
                     if turn == "w":
                         turn = "b"
                     else:
                         turn = "w"
 
-       
+    menu_screen()
         
 width = 750
 height = 750
 win = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Chess Game")
-main()
+menu_screen(win)

@@ -112,7 +112,6 @@ class Board:
 
                 if self.board[row][col].color == color:
                     self.board[row][col].selected = True
-                    print((row, col), prev)
                     
 
             else:
