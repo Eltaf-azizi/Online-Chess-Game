@@ -9,6 +9,7 @@ pygame.font.init()
 board = pygame.transform.scale(pygame.image.load(os.path.join("image", "board_alt.png")), (750, 750))
 rect = (113, 113, 525, 525)
 
+turn = "w"
 
 def menu_screen(win):
     run = True
@@ -102,9 +103,10 @@ def click(pos):
 
 
 def main():
+
+    global turn
     p1Time = 900  
     p2Time = 900  
-    turn = "w"  
     count = 0
     bo = Board()  
     bo.update_moves()  
@@ -138,21 +140,20 @@ def main():
 
             
             if event.type == pygame.MOUSEBUTTONUP:
-                import numpy
-                pos = pygame.mouse.get_pos()
-                bo.update_moves() 
-                i, j = click(pos)  
-                change = bo.select(i, j, turn)
-                print(numpy.array(bo.board))
+                if turn == color:
+                    pos = pygame.mouse.get_pos()
+                    bo.update_moves() 
+                    i, j = click(pos)  
+                    change = bo.select(i, j, turn)
 
-                if change == True:
-                    startTime = time.time()  
-                    count += 1
-                   
-                    if turn == "w":
-                        turn = "b"
-                    else:
-                        turn = "w"
+                    if change == True:
+                        startTime = time.time()  
+                        count += 1
+                    
+                        if turn == "w":
+                            turn = "b"
+                        else:
+                            turn = "w"
 
     menu_screen()
         
