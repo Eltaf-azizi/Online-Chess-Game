@@ -4,7 +4,7 @@ from board import Board
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-server = open("ip.txt", "r")
+server = "157.230.230.181"
 port = 5555
 
 server_ip = socket.gethostbyname(server)
@@ -19,14 +19,13 @@ except socket.error as e:
 s.listen(2)
 print("waiting for a connection")
 
-bo = Board(8, 8)
 
 currentId = "w"
 
 def threaded_client(conn):
 
     global currentId, pos
-    conn.send(bo, str.encode(currentId))
+    conn.send(str.encode(currentId))
     currentId = "b"
     reply = ''
 
@@ -65,6 +64,6 @@ def threaded_client(conn):
 
 while True:
     conn, addr = s.accept()
-    print("Connected to: ", addr)
+    print("Connected to: ")
 
     start_new_thread(threaded_client, (conn, ))

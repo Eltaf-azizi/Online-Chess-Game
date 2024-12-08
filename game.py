@@ -140,20 +140,21 @@ def main():
 
             
             if event.type == pygame.MOUSEBUTTONUP:
-                if turn == color:
-                    pos = pygame.mouse.get_pos()
-                    bo.update_moves() 
-                    i, j = click(pos)  
-                    change = bo.select(i, j, turn)
+                pos = pygame.mouse.get_pos()
+                bo.update_moves() 
+                i, j = click(pos)  
+                change = bo.select(i, j, turn)
 
-                    if change == True:
-                        startTime = time.time()  
-                        count += 1
+                if change == True:
+                    startTime = time.time()  
+                    count += 1
                     
-                        if turn == "w":
-                            turn = "b"
-                        else:
-                            turn = "w"
+                    if turn == "w":
+                        turn = "b"
+                        bo.reset_selected()
+                    else:
+                        turn = "w"
+                        bo.reset_selected()
 
     menu_screen()
         
@@ -161,5 +162,5 @@ width = 750
 height = 750
 win = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Chess Game")
-bo, color = connect()
+# bo, color = connect()
 menu_screen(win)

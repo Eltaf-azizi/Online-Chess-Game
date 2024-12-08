@@ -1,13 +1,15 @@
 import socket
+import pickle
 
 
 class Network:
     def __init__(self):
         self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.host = open("ip.txt", "r")
+        self.host = "157.230.230.181"
         self.port = 5555
         self.addr = (self.host, self.port)
-        self.id = self.connect()
+        self.board, self.id = self.connect()
+        self.board = pickle.loads(self.board)
 
 
     def connect(self):
@@ -32,3 +34,4 @@ class Network:
 
 n = Network()
 n.send("hello")
+print(n.id)
