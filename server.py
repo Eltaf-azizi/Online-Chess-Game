@@ -1,10 +1,10 @@
 import socket
 from _thread import *
-import sys
+from board import Board
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-server = ''
+server = open("ip.txt", "r")
 port = 5555
 
 server_ip = socket.gethostbyname(server)
@@ -19,14 +19,15 @@ except socket.error as e:
 s.listen(2)
 print("waiting for a connection")
 
-currentId = "0"
-pos = ["0:50, 50", "1:100, 100"]
+bo = Board(8, 8)
+
+currentId = "w"
 
 def threaded_client(conn):
 
     global currentId, pos
-    conn.send(str.encode(currentId))
-    currentId = "1"
+    conn.send(bo, str.encode(currentId))
+    currentId = "b"
     reply = ''
 
     while True:
@@ -39,15 +40,16 @@ def threaded_client(conn):
                 break
             else:
                 print("Recieved: " + reply)
-                arr = reply.split(":")
-                id = int(arr[0])
-                pos[id] = reply 
+                
 
+                if reply.count("w") == 1:
+                    nid = "b"
+                else:
+                    nid = "w"
 
                 if id == 0: nid = 1
                 if id == 1: nid = 0
 
-                reply = pos[nid][:]
                 print("Sending: " + reply)
 
 

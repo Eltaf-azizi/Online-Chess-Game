@@ -161,4 +161,5 @@ width = 750
 height = 750
 win = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Chess Game")
+bo, color = connect()
 menu_screen(win)
