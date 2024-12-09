@@ -8,7 +8,7 @@ class Network:
         self.host = "157.230.230.181"
         self.port = 5555
         self.addr = (self.host, self.port)
-        self.board, self.id = self.connect()
+        self.board = self.connect()
         self.board = pickle.loads(self.board)
 
 
@@ -24,7 +24,7 @@ class Network:
         :return: str
         """
         try:
-            self.client.send(str.encode(data))
+            self.client.send(pickle.dumps(data))
             reply = self.client.recv(2048).decode()
             return reply
         
@@ -33,5 +33,8 @@ class Network:
         
 
 n = Network()
-n.send("hello")
-print(n.id)
+reply = n.send("hello")
+print(reply)
+reply.board[0][0] = 0
+reply2 = n.send(reply)
+print(reply2)
