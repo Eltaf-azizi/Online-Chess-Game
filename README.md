@@ -27,3 +27,9 @@ Before diving in, ensure you have the following installed:
 3. Run the game:
 
        python main.py  
+
+
+🛠️ How It Works
+Networking: The game uses Python sockets for real-time communication between players.
+Game Logic: Implements core chess rules, including special moves like castling and en passant.
+User Interface: A clean, interactive gameboard for seamless play.
