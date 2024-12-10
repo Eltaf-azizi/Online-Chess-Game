@@ -8,3 +8,22 @@ Welcome to Online Chess Game, a fully functional, interactive chess experience b
  - **Beautiful Gameboard:** A visually pleasing interface (thanks to Pygame or similar libraries).
  - **Smooth Networking:** Seamless multiplayer experience powered by Python sockets.
  - **Undo Moves:** Take back your moves if needed (because we all make mistakes).
+
+
+# 🚀 Getting Started
+## Prerequisites
+Before diving in, ensure you have the following installed:
+
+ - Python 3.x
+ - Required dependencies (listed in requirements.txt).
+## Installation
+1. Clone this repository:
+   
+       git clone https://github.com/yourusername/online-chess-game.git  
+       cd online-chess-game  
+2. Install the dependencies:
+   
+       pip install -r requirements.txt  
+3. Run the game:
+
+       python main.py  
