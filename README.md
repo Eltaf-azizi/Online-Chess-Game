@@ -34,9 +34,9 @@ Before diving in, ensure you have the following installed:
  - **Game Logic:** Implements core chess rules, including special moves like castling and en passant.
  - **User Interface:** A clean, interactive gameboard for seamless play.
 
-   🎮 How to Play
-Start the Game: Run main.py.
-Host or Join a Match: Host a game server or connect to one.
-Make Your Moves: Click on pieces to move them. All legal moves are validated automatically.
-Enjoy!
+## 🎮 How to Play
+1. **Start the Game:** Run main.py.
+2. **Host or Join a Match:** Host a game server or connect to one.
+3. **Make Your Moves:** Click on pieces to move them. All legal moves are validated automatically.
+4. **Enjoy!**
 
