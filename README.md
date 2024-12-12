@@ -42,7 +42,7 @@ Before diving in, ensure you have the following installed:
 
 
 ## 🌍 Why This Project?
-Chess is not just a game; it’s a way of thinking. Building this project taught us the beauty of combining logic, strategy, and technology. It’s perfect for:
+  Chess is not just a game; it’s a way of thinking. Building this project taught us the beauty of combining logic, strategy, and   technology. It’s perfect for:
 
  - Coders who love Python and want to explore game development.
  - Chess lovers who wish to understand the mechanics behind the board.
