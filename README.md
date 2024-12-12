@@ -50,6 +50,6 @@ Before diving in, ensure you have the following installed:
 ## 🙌 Contributing
 Found a bug? Want to add a feature? Contributions are welcome!
 
-Fork the repository.
-Create a new branch.
-Submit a pull request with your improvements.
+1. Fork the repository.
+2. Create a new branch.
+3. Submit a pull request with your improvements.
