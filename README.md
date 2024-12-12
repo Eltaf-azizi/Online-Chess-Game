@@ -47,3 +47,9 @@ Before diving in, ensure you have the following installed:
  - Coders who love Python and want to explore game development.
  - Chess lovers who wish to understand the mechanics behind the board.
 
+## 🙌 Contributing
+Found a bug? Want to add a feature? Contributions are welcome!
+
+Fork the repository.
+Create a new branch.
+Submit a pull request with your improvements.
