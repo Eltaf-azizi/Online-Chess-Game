@@ -33,8 +33,5 @@ class Network:
         
 
 n = Network()
-reply = n.send("hello")
-print(reply)
-reply.board[0][0] = 0
-reply2 = n.send(reply)
-print(reply2)
+reply = n.send(n.board)
+print(pickle.loads(reply))

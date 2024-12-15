@@ -52,7 +52,7 @@ def threaded_client(conn):
                 print("Sending: " + reply)
 
 
-            conn.sendall(str.encode(reply))
+            conn.sendall(reply)
 
         except:
             break
