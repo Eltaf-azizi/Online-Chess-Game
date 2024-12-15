@@ -33,3 +33,23 @@ Before diving in, ensure you have the following installed:
  - **Networking:** The game uses Python sockets for real-time communication between players.
  - **Game Logic:** Implements core chess rules, including special moves like castling and en passant.
  - **User Interface:** A clean, interactive gameboard for seamless play.
+
+## 🎮 How to Play
+1. **Start the Game:** Run main.py.
+2. **Host or Join a Match:** Host a game server or connect to one.
+3. **Make Your Moves:** Click on pieces to move them. All legal moves are validated automatically.
+4. **Enjoy!**
+
+
+## 🌍 Why This Project?
+  Chess is not just a game; it’s a way of thinking. Building this project taught us the beauty of combining logic, strategy, and   technology. It’s perfect for:
+
+ - Coders who love Python and want to explore game development.
+ - Chess lovers who wish to understand the mechanics behind the board.
+
+## 🙌 Contributing
+Found a bug? Want to add a feature? Contributions are welcome!
+
+1. Fork the repository.
+2. Create a new branch.
+3. Submit a pull request with your improvements.
