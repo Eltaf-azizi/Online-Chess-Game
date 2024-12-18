@@ -166,3 +166,34 @@ def threaded_client(conn, game, spec=False):
         specs -= 1
         conn.close()
 
+while True:
+    read_specs()
+    if connections < 6:
+        conn, addr = s.accept()
+        spec = False
+        g = -1
+        print("[CONNECT] New connection")
+
+        for game in games.keys():
+            if games[game].ready == False:
+                g=game
+
+        if g == -1:
+            try:
+                g = list(games.keys())[-1]+1
+                games[g] = Board(8,8)
+            except:
+                g = 0
+                games[g] = Board(8,8)
+
+        '''if addr[0] in spectartor_ids and specs == 0:
+            spec = True
+            print("[SPECTATOR DATA] Games to view: ")
+            print("[SPECTATOR DATA]", games.keys())
+            g = 0
+            specs += 1'''
+
+        print("[DATA] Number of Connections:", connections+1)
+        print("[DATA] Number of Games:", len(games))
+
+        start_new_thread(threaded_client, (conn,g,spec))
